@@ -41,6 +41,10 @@
     }
   }
 
+  .title {
+    @apply ml-1.5 block truncate font-normal;
+  }
+
   .option-highlighted {
     @apply bg-gray-100;
   }

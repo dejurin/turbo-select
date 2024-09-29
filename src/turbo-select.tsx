@@ -3,7 +3,7 @@
  *
  * @file TurboSelect.tsx
  *
- * @version 0.1.0
+ * @version 0.3.0
  *
  * @license
  * MIT License
@@ -26,20 +26,33 @@ import { useClickOutside } from "./hooks/click";
  *
  * @returns {HTMLStyleElement} The created style element.
  */
-const injectStyles = (css: string) => {
+const injectStyles = (css: string): HTMLStyleElement => {
   const styleElement = document.createElement("style");
   styleElement.textContent = css;
   document.head.appendChild(styleElement);
   return styleElement;
 };
 
+/**
+ * Interpolates the template string with values from the item object.
+ *
+ * @param {string} template - The template string with placeholders like {label} and {value}.
+ * @param {TurboSelectData} item - The item object containing label and value.
+ * @returns {string} - The interpolated string with the values from item.
+ */
+const interpolateTemplate = (template: string, item: TurboSelectData): string => {
+  if (!item.label && !item.value) return "";
+  return template.replace("{label}", item.label).replace("{value}", item.value);
+};
+
 interface TurboSelectProps {
   data: string;
   selected: string;
-  label: string;
+  selectLabel: string;
   searchLabel?: string;
   loadingLabel?: string;
   noResults?: string;
+  template?: string;
 }
 
 type TurboSelectData = {
@@ -67,7 +80,8 @@ type TurboSelectData = {
  *
  * @param {string} data - A JSON string containing the options
  * @param {string} selected - The value of the initially selected option
- * @param {string} [label=Select an option] - The label for the select dropdown when no option is selected
+ * @param {string} [template="{label}"] - The template string used to display the selected option and template for the dropdown list item
+ * @param {string} [selectLabel=Select an option] - The label for the select dropdown
  * @param {string} [searchLabel=Search...] - The placeholder text for the search input
  * @param {string} [loadingLabel=Loading...] - The message displayed while options are loading
  * @param {string} [noResults=No results found.] - The message displayed when no search results are found
@@ -75,10 +89,11 @@ type TurboSelectData = {
 const TurboSelect = ({
   data,
   selected,
-  noResults = "No results found.",
-  label = "Select an option",
+  selectLabel = "Select an option",
   loadingLabel = "Loading...",
   searchLabel = "Search...",
+  noResults = "No results found.",
+  template = "{label}", // Default template
 }: TurboSelectProps) => {
   const [dataList, setDataList] = useState<TurboSelectData[]>([]);
   const [selectedValue, setSelectedValue] = useState<string>(selected);
@@ -92,7 +107,7 @@ const TurboSelect = ({
   useEffect(() => {
     const styleElement = injectStyles(cssText);
     return () => {
-      document.head.removeChild(styleElement); // Удаление стилей при размонтировании
+      document.head.removeChild(styleElement);
     };
   }, []);
 
@@ -139,6 +154,11 @@ const TurboSelect = ({
     if (isOpen && searchInputRef.current) {
       searchInputRef.current.focus();
     }
+    return () => {
+      if (searchInputRef.current) {
+        searchInputRef.current.blur();
+      }
+    };
   }, [isOpen]);
 
   useEffect(() => {
@@ -162,6 +182,7 @@ const TurboSelect = ({
   const handleClose = () => {
     setIsOpen(false);
     setSearchTerm("");
+    setHighlightedIndex(-1);
   };
 
   const handleSelect = (value: string) => {
@@ -188,21 +209,33 @@ const TurboSelect = ({
           >
             {mounted ? (
               <div class="flex items-center">
-                {dataList.find((item) => item.value === selectedValue)?.img && (
-                  <img
-                    class="img"
-                    src={dataList.find((item) => item.value === selectedValue)?.img}
-                    alt={dataList.find((item) => item.value === selectedValue)?.label}
-                  />
-                )}
-                <span class="ml-1.5 block truncate">
-                  {dataList.find((item) => item.value === selectedValue)?.label || label}
-                </span>
+                {(() => {
+                  const selectedItem = dataList.find((item) => item.value === selectedValue);
+                  return selectedItem?.img ? (
+                    <img class="img" src={selectedItem.img} alt={selectedItem.label} />
+                  ) : (
+                    <></>
+                  );
+                })()}
+                <span
+                  class="title"
+                  dangerouslySetInnerHTML={{
+                    __html:
+                      interpolateTemplate(
+                        template,
+                        dataList.find((item) => item.value === selectedValue) || {
+                          value: "",
+                          label: "",
+                        }
+                      ) || selectLabel,
+                  }}
+                />
               </div>
             ) : (
               <div role="status">
                 <svg
                   aria-hidden="true"
+                  key="spinner-icon"
                   class="spinner"
                   viewBox="0 0 100 101"
                   fill="none"
@@ -267,6 +300,7 @@ const TurboSelect = ({
                   onClick={() => handleSelect(item.value)}
                   role="option"
                   tabIndex={0}
+                  id={`option-${index}`}
                   aria-selected={highlightedIndex === index}
                   class={clsx("option", {
                     "option-highlighted": highlightedIndex === index,
@@ -275,8 +309,13 @@ const TurboSelect = ({
                   <div class="flex items-center">
                     {item.img && <img class="img" src={item.img} alt={item.label} />}
                     <span
-                      class="ml-1.5 block truncate font-normal"
-                      dangerouslySetInnerHTML={{ __html: item.label }}
+                      class="title"
+                      dangerouslySetInnerHTML={{
+                        __html: interpolateTemplate(template, {
+                          label: item.label,
+                          value: item.value,
+                        }),
+                      }}
                     />
                   </div>
                   {selectedValue === item.value && (
@@ -311,4 +350,4 @@ const TurboSelect = ({
 
 export default TurboSelect;
 
-register(TurboSelect, "turbo-select", ["data", "selected"], { shadow: true });
+register(TurboSelect, "turbo-select", ["data", "selected", "template"], { shadow: true });

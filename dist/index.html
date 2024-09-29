@@ -12,6 +12,7 @@
 
     <script>document.addEventListener("DOMContentLoaded", function() {
     const select = document.querySelector("turbo-select");
+    select.setAttribute("template", "{value} - {label}");
     select.setAttribute("data", JSON.stringify([
         {
             label: "US Dollar",
@@ -19,7 +20,7 @@
             img: "https://curate.ams3.cdn.digitaloceanspaces.com/f/flags/usd.svg"
         },
         {
-            label: "<b>Euro</b>",
+            label: "Euro",
             value: "EUR",
             img: "https://curate.ams3.cdn.digitaloceanspaces.com/f/flags/eur.svg"
         }
@@ -27,7 +28,6 @@
 });
 
 </script>
-
     <script src="/index.a0a0205e.js" defer=""></script>
   </body>
 </html>

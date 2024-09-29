@@ -67,10 +67,11 @@ You can use the TurboSelect component as a custom HTML tag in your project. Make
 
 - `data`: A JSON string representing the options. Each option should have a `label` and a `value`, and can optionally include an `img`.
 - `selected`: The value of the pre-selected option.
-- `label`: The label for the select dropdown when no option is selected.
+- `template`: Template for the dropdown list item.
+- `selectLabel`: The label for the select dropdown when no option is selected.
 - `searchLabel`: The placeholder text for the search input.
-- `noResults`: The message displayed when no search results are found.
 - `loadingLabel`: The message displayed while options are loading.
+- `noResults`: The message displayed when no search results are found.
 
 ### Example
 
