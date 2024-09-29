@@ -1,0 +1,58 @@
+{
+  "name": "turbo-select",
+  "version": "0.0.1",
+  "description": "A lightweight, 12kb (gzip) select component with support for icons, seamless search functionality, and full a11y (accessibility) support, designed for an intuitive user experience.",
+  "scripts": {
+    "build": "bun run build:dev && bun run build:prod",
+    "build:prod": "NODE_ENV=production parcel build src/turbo-select.tsx --dist-dir dist --log-level verbose",
+    "start": "parcel src/index.html --open",
+    "prettier": "prettier --write ./src",
+    "lint": "eslint 'src/*.{ts,tsx}'",
+    "lint:fix": "eslint 'src/*.{ts,tsx}' --fix",
+    "test": "tsc && wtr src/*.test.{ts,tsx}",
+    "test:browsers": "tsc && wtr src/*.test.{ts,tsx} --playwright --browsers chromium firefox webkit"
+  },
+  "keywords": [],
+  "author": "https://github.com/dejurin/",
+  "license": "MIT",
+  "dependencies": {
+    "caniuse-lite": "^1.0.30001664",
+    "clsx": "^2.1.1",
+    "preact": "^10.24.1",
+    "preact-custom-element": "^4.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@parcel/config-default": "^2.12.0",
+    "@parcel/transformer-inline-string": "2.12.0",
+    "@types/preact-custom-element": "^4.0.4",
+    "@typescript-eslint/eslint-plugin": "^8.7.0",
+    "@typescript-eslint/parser": "^8.7.0",
+    "eslint": "^9.11.1",
+    "eslint-config-preact": "^1.5.0",
+    "eslint-plugin-react": "^7.37.0",
+    "parcel": "^2.12.0",
+    "postcss": "^8.4.47",
+    "preact-transitioning": "^1.4.2",
+    "prettier": "^3.3.3",
+    "tailwindcss": "^3.4.13",
+    "typescript": "^5.6.2"
+  },
+  "targets": {
+    "default": {
+      "context": "browser",
+      "includeNodeModules": true,
+      "distDir": "./dist",
+      "isLibrary": false,
+      "engines": {
+        "browsers": "> 0.25%, not dead",
+        "node": ">= 12"
+      },
+      "optimize": true
+    }
+  },
+  "browserslist": [
+    "> 0.25%",
+    "not dead"
+  ]
+}
