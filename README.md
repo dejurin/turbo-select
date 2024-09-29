@@ -2,6 +2,8 @@
 
 A lightweight, 12kb (gzip) select component with support for icons, seamless search functionality, and full a11y (accessibility) support, designed for an intuitive user experience.
 
+<img src="/assets/turbo-select.gif" alt="Turbo Select - JavaScript">
+
 ## Installation
 
 To install and use TurboSelect, you can either clone the repository or install the package using a package manager like `bun` or `npm`.
