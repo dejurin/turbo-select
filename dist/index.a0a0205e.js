@@ -851,7 +851,7 @@ const TurboSelect = ({ data, selected, noResults = "No results found.", label = 
         },
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 203,
+            lineNumber: 202,
             columnNumber: 9
         },
         __self: undefined
@@ -866,7 +866,7 @@ const TurboSelect = ({ data, selected, noResults = "No results found.", label = 
         onKeyDown: handleKeyDown,
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 213,
+            lineNumber: 212,
             columnNumber: 11
         },
         __self: undefined
@@ -881,7 +881,7 @@ const TurboSelect = ({ data, selected, noResults = "No results found.", label = 
             }),
             __source: {
                 fileName: "src/turbo-select.tsx",
-                lineNumber: 223,
+                lineNumber: 222,
                 columnNumber: 17
             },
             __self: undefined
@@ -889,7 +889,7 @@ const TurboSelect = ({ data, selected, noResults = "No results found.", label = 
             class: "flex items-center",
             __source: {
                 fileName: "src/turbo-select.tsx",
-                lineNumber: 233,
+                lineNumber: 232,
                 columnNumber: 19
             },
             __self: undefined
@@ -899,23 +899,26 @@ const TurboSelect = ({ data, selected, noResults = "No results found.", label = 
             alt: item.label,
             __source: {
                 fileName: "src/turbo-select.tsx",
-                lineNumber: 234,
+                lineNumber: 233,
                 columnNumber: 34
             },
             __self: undefined
         }), /*#__PURE__*/ (0, _preact.h)("span", {
             class: "ml-1.5 block truncate font-normal",
+            dangerouslySetInnerHTML: {
+                __html: item.label
+            },
             __source: {
                 fileName: "src/turbo-select.tsx",
-                lineNumber: 235,
+                lineNumber: 234,
                 columnNumber: 21
             },
             __self: undefined
-        }, item.label)), selectedValue === item.value && /*#__PURE__*/ (0, _preact.h)("span", {
+        })), selectedValue === item.value && /*#__PURE__*/ (0, _preact.h)("span", {
             class: "checked",
             __source: {
                 fileName: "src/turbo-select.tsx",
-                lineNumber: 238,
+                lineNumber: 237,
                 columnNumber: 21
             },
             __self: undefined
@@ -926,7 +929,7 @@ const TurboSelect = ({ data, selected, noResults = "No results found.", label = 
             "aria-hidden": "true",
             __source: {
                 fileName: "src/turbo-select.tsx",
-                lineNumber: 239,
+                lineNumber: 238,
                 columnNumber: 23
             },
             __self: undefined
@@ -936,7 +939,7 @@ const TurboSelect = ({ data, selected, noResults = "No results found.", label = 
             "clip-rule": "evenodd",
             __source: {
                 fileName: "src/turbo-select.tsx",
-                lineNumber: 245,
+                lineNumber: 244,
                 columnNumber: 25
             },
             __self: undefined
@@ -945,7 +948,7 @@ const TurboSelect = ({ data, selected, noResults = "No results found.", label = 
         "aria-disabled": "true",
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 256,
+            lineNumber: 255,
             columnNumber: 15
         },
         __self: undefined

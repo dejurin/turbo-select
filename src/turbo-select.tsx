@@ -199,7 +199,6 @@ const TurboSelect = ({
             type="search"
           />
         )}
-
         <StyleTransition
           in={isOpen}
           duration={500}
@@ -232,7 +231,10 @@ const TurboSelect = ({
                 >
                   <div class="flex items-center">
                     {item.img && <img class="img" src={item.img} alt={item.label} />}
-                    <span class="ml-1.5 block truncate font-normal">{item.label}</span>
+                    <span
+                      class="ml-1.5 block truncate font-normal"
+                      dangerouslySetInnerHTML={{ __html: item.label }}
+                    />
                   </div>
                   {selectedValue === item.value && (
                     <span class="checked">

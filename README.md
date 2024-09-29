@@ -99,9 +99,13 @@ You can use the TurboSelect component as a custom HTML tag in your project. Make
         {
           label: "US Dollar",
           value: "USD",
-          img: "usd.svg",
+          img: "https://curate.ams3.cdn.digitaloceanspaces.com/f/flags/usd.svg",
         },
-        ...
+        {
+          label: "Euro",
+          value: "EUR",
+          img: "https://curate.ams3.cdn.digitaloceanspaces.com/f/flags/eur.svg",
+        },
       ]);
       turboSelect.setAttribute("data", currency);
       turboSelect.setAttribute("selected", "USD");
