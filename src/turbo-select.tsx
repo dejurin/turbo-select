@@ -1,3 +1,14 @@
+/**
+ * TurboSelect Component
+ *
+ * @file TurboSelect.tsx
+ *
+ * @version 0.1.0
+ *
+ * @license
+ * MIT License
+ */
+
 import { Fragment, h } from "preact";
 import { useEffect, useMemo, useRef, useState } from "preact/hooks";
 
@@ -7,6 +18,14 @@ import cssText from "bundle-text:./styles.css";
 import register from "preact-custom-element";
 import { useClickOutside } from "./hooks/click";
 
+/**
+ * Injects the given CSS string into the page by creating a new style element
+ * and appending it to the head of the document.
+ *
+ * @param {string} css - The CSS text to inject.
+ *
+ * @returns {HTMLStyleElement} The created style element.
+ */
 const injectStyles = (css: string) => {
   const styleElement = document.createElement("style");
   styleElement.textContent = css;
@@ -29,6 +48,30 @@ type TurboSelectData = {
   img?: string; // Image URL is optional
 };
 
+/**
+ * A lightweight, 12kb (gzip) select component with no dependencies, support for icons, seamless search functionality, and full a11y (accessibility) support, designed for an intuitive user experience.
+ *
+ * @example
+ * <TurboSelect
+ *   data='[
+ *     {"label": "Apple", "value": "apple"},
+ *     {"label": "Orange", "value": "orange"},
+ *     {"label": "Banana", "value": "banana"}
+ *   ]'
+ *   selected="orange"
+ *   label="Select a fruit"
+ *   searchLabel="Search for a fruit..."
+ *   noResults="No fruits found."
+ *   loadingLabel="Loading fruits...">
+ * </TurboSelect>
+ *
+ * @param {string} data - A JSON string containing the options
+ * @param {string} selected - The value of the initially selected option
+ * @param {string} [label=Select an option] - The label for the select dropdown when no option is selected
+ * @param {string} [searchLabel=Search...] - The placeholder text for the search input
+ * @param {string} [loadingLabel=Loading...] - The message displayed while options are loading
+ * @param {string} [noResults=No results found.] - The message displayed when no search results are found
+ */
 const TurboSelect = ({
   data,
   selected,
