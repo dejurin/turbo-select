@@ -2,8 +2,12 @@
  * TurboSelect Component
  *
  * @file TurboSelect.tsx
+ * @module TurboSelect
+ * @author https://github.com/dejurin
+ * @see {@link https://github.com/dejurin/turbo-select}
+ * 
  *
- * @version 0.3.0
+ * @version 0.3.1
  *
  * @license
  * MIT License
@@ -277,7 +281,7 @@ const TurboSelect = ({
         )}
         <StyleTransition
           in={isOpen}
-          duration={500}
+          duration={300}
           styles={{
             enter: { opacity: 0 },
             enterActive: { opacity: 1 },
@@ -287,7 +291,7 @@ const TurboSelect = ({
         >
           <ul
             class={clsx("listbox")}
-            style={{ transition: "opacity 500ms" }}
+            style={{ transition: "opacity 300ms" }}
             tabIndex={-1}
             role="listbox"
             aria-labelledby="listbox-label"
