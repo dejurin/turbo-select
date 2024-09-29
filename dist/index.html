@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turbo Select</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  </head>
+
+  <body style="background-color: #faebd7; justify-content: center; align-items: center; padding: 25px">
+    <turbo-select></turbo-select>
+
+    <script>document.addEventListener("DOMContentLoaded", function() {
+    const select = document.querySelector("turbo-select");
+    select.setAttribute("data", JSON.stringify([
+        {
+            label: "US Dollar",
+            value: "USD",
+            img: "https://curate.ams3.cdn.digitaloceanspaces.com/f/flags/usd.svg"
+        },
+        {
+            label: "Euro",
+            value: "EUR",
+            img: "https://curate.ams3.cdn.digitaloceanspaces.com/f/flags/eur.svg"
+        }
+    ]));
+});
+
+</script>
+
+    <script src="/index.a0a0205e.js" defer=""></script>
+  </body>
+</html>
