@@ -5,9 +5,9 @@
  * @module TurboSelect
  * @author https://github.com/dejurin
  * @see {@link https://github.com/dejurin/turbo-select}
- * 
  *
- * @version 0.3.1
+ *
+ * @version 0.4.0
  *
  * @license
  * MIT License
@@ -190,8 +190,18 @@ const TurboSelect = ({
   };
 
   const handleSelect = (value: string) => {
-    setSelectedValue(value);
-    handleClose();
+    const selectedItem = dataList.find((item) => item.value === value);
+    if (selectedItem) {
+      setSelectedValue(value);
+      handleClose();
+
+      const event = new CustomEvent("select", {
+        detail: { value: selectedItem.value, label: selectedItem.label },
+        bubbles: true,
+        composed: true,
+      });
+      ref.current?.dispatchEvent(event);
+    }
   };
 
   useClickOutside(ref, handleClose);
@@ -354,4 +364,9 @@ const TurboSelect = ({
 
 export default TurboSelect;
 
-register(TurboSelect, "turbo-select", ["data", "selected", "template"], { shadow: true });
+register(
+  TurboSelect,
+  "turbo-select",
+  ["data", "selected", "selectLabel", "searchLabel", "loadingLabel", "noResults", "template"],
+  { shadow: true }
+);

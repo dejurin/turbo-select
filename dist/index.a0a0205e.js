@@ -588,8 +588,12 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
  * TurboSelect Component
  *
  * @file TurboSelect.tsx
+ * @module TurboSelect
+ * @author https://github.com/dejurin
+ * @see {@link https://github.com/dejurin/turbo-select}
  *
- * @version 0.2.0
+ *
+ * @version 0.4.0
  *
  * @license
  * MIT License
@@ -727,21 +731,33 @@ var _click = require("./hooks/click");
         setHighlightedIndex(-1);
     };
     const handleSelect = (value)=>{
-        setSelectedValue(value);
-        handleClose();
+        const selectedItem = dataList.find((item)=>item.value === value);
+        if (selectedItem) {
+            setSelectedValue(value);
+            handleClose();
+            const event = new CustomEvent("select", {
+                detail: {
+                    value: selectedItem.value,
+                    label: selectedItem.label
+                },
+                bubbles: true,
+                composed: true
+            });
+            ref.current?.dispatchEvent(event);
+        }
     };
     (0, _click.useClickOutside)(ref, handleClose);
     return /*#__PURE__*/ (0, _preact.h)((0, _preact.Fragment), {
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 196,
+            lineNumber: 210,
             columnNumber: 5
         },
         __self: undefined
     }, /*#__PURE__*/ (0, _preact.h)("style", {
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 197,
+            lineNumber: 211,
             columnNumber: 7
         },
         __self: undefined
@@ -750,7 +766,7 @@ var _click = require("./hooks/click");
         ref: ref,
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 198,
+            lineNumber: 212,
             columnNumber: 7
         },
         __self: undefined
@@ -767,7 +783,7 @@ var _click = require("./hooks/click");
         onKeyDown: handleKeyDown,
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 200,
+            lineNumber: 214,
             columnNumber: 11
         },
         __self: undefined
@@ -775,7 +791,7 @@ var _click = require("./hooks/click");
         class: "flex items-center",
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 211,
+            lineNumber: 225,
             columnNumber: 15
         },
         __self: undefined
@@ -787,7 +803,7 @@ var _click = require("./hooks/click");
             alt: selectedItem.label,
             __source: {
                 fileName: "src/turbo-select.tsx",
-                lineNumber: 215,
+                lineNumber: 229,
                 columnNumber: 21
             },
             __self: undefined
@@ -802,7 +818,7 @@ var _click = require("./hooks/click");
         },
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 220,
+            lineNumber: 234,
             columnNumber: 17
         },
         __self: undefined
@@ -810,7 +826,7 @@ var _click = require("./hooks/click");
         role: "status",
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 235,
+            lineNumber: 249,
             columnNumber: 15
         },
         __self: undefined
@@ -823,7 +839,7 @@ var _click = require("./hooks/click");
         xmlns: "http://www.w3.org/2000/svg",
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 236,
+            lineNumber: 250,
             columnNumber: 17
         },
         __self: undefined
@@ -832,7 +848,7 @@ var _click = require("./hooks/click");
         fill: "currentColor",
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 244,
+            lineNumber: 258,
             columnNumber: 19
         },
         __self: undefined
@@ -841,7 +857,7 @@ var _click = require("./hooks/click");
         fill: "currentFill",
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 248,
+            lineNumber: 262,
             columnNumber: 19
         },
         __self: undefined
@@ -849,7 +865,7 @@ var _click = require("./hooks/click");
         class: "sr-only",
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 253,
+            lineNumber: 267,
             columnNumber: 17
         },
         __self: undefined
@@ -857,7 +873,7 @@ var _click = require("./hooks/click");
         class: "caret",
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 256,
+            lineNumber: 270,
             columnNumber: 13
         },
         __self: undefined
@@ -867,7 +883,7 @@ var _click = require("./hooks/click");
         "aria-hidden": "true",
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 257,
+            lineNumber: 271,
             columnNumber: 15
         },
         __self: undefined
@@ -877,7 +893,7 @@ var _click = require("./hooks/click");
         "clip-rule": "evenodd",
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 258,
+            lineNumber: 272,
             columnNumber: 17
         },
         __self: undefined
@@ -892,13 +908,13 @@ var _click = require("./hooks/click");
         type: "search",
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 267,
+            lineNumber: 281,
             columnNumber: 11
         },
         __self: undefined
     }), /*#__PURE__*/ (0, _preact.h)((0, _preactTransitioning.StyleTransition), {
         in: isOpen,
-        duration: 500,
+        duration: 300,
         styles: {
             enter: {
                 opacity: 0
@@ -915,14 +931,14 @@ var _click = require("./hooks/click");
         },
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 278,
+            lineNumber: 292,
             columnNumber: 9
         },
         __self: undefined
     }, /*#__PURE__*/ (0, _preact.h)("ul", {
         class: (0, _clsxDefault.default)("listbox"),
         style: {
-            transition: "opacity 500ms"
+            transition: "opacity 300ms"
         },
         tabIndex: -1,
         role: "listbox",
@@ -930,7 +946,7 @@ var _click = require("./hooks/click");
         onKeyDown: handleKeyDown,
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 288,
+            lineNumber: 302,
             columnNumber: 11
         },
         __self: undefined
@@ -946,7 +962,7 @@ var _click = require("./hooks/click");
             }),
             __source: {
                 fileName: "src/turbo-select.tsx",
-                lineNumber: 298,
+                lineNumber: 312,
                 columnNumber: 17
             },
             __self: undefined
@@ -954,7 +970,7 @@ var _click = require("./hooks/click");
             class: "flex items-center",
             __source: {
                 fileName: "src/turbo-select.tsx",
-                lineNumber: 309,
+                lineNumber: 323,
                 columnNumber: 19
             },
             __self: undefined
@@ -964,7 +980,7 @@ var _click = require("./hooks/click");
             alt: item.label,
             __source: {
                 fileName: "src/turbo-select.tsx",
-                lineNumber: 310,
+                lineNumber: 324,
                 columnNumber: 34
             },
             __self: undefined
@@ -978,7 +994,7 @@ var _click = require("./hooks/click");
             },
             __source: {
                 fileName: "src/turbo-select.tsx",
-                lineNumber: 311,
+                lineNumber: 325,
                 columnNumber: 21
             },
             __self: undefined
@@ -986,7 +1002,7 @@ var _click = require("./hooks/click");
             class: "checked",
             __source: {
                 fileName: "src/turbo-select.tsx",
-                lineNumber: 322,
+                lineNumber: 336,
                 columnNumber: 21
             },
             __self: undefined
@@ -997,7 +1013,7 @@ var _click = require("./hooks/click");
             "aria-hidden": "true",
             __source: {
                 fileName: "src/turbo-select.tsx",
-                lineNumber: 323,
+                lineNumber: 337,
                 columnNumber: 23
             },
             __self: undefined
@@ -1007,7 +1023,7 @@ var _click = require("./hooks/click");
             "clip-rule": "evenodd",
             __source: {
                 fileName: "src/turbo-select.tsx",
-                lineNumber: 329,
+                lineNumber: 343,
                 columnNumber: 25
             },
             __self: undefined
@@ -1016,7 +1032,7 @@ var _click = require("./hooks/click");
         "aria-disabled": "true",
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 340,
+            lineNumber: 354,
             columnNumber: 15
         },
         __self: undefined
@@ -1026,6 +1042,10 @@ exports.default = TurboSelect;
 (0, _preactCustomElementDefault.default)(TurboSelect, "turbo-select", [
     "data",
     "selected",
+    "selectLabel",
+    "searchLabel",
+    "loadingLabel",
+    "noResults",
     "template"
 ], {
     shadow: true
@@ -1825,7 +1845,7 @@ function clsx() {
 exports.default = clsx;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7ocih":[function(require,module,exports) {
-module.exports = "*, :before, :after, ::backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x: ;\n  --tw-pan-y: ;\n  --tw-pinch-zoom: ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position: ;\n  --tw-gradient-via-position: ;\n  --tw-gradient-to-position: ;\n  --tw-ordinal: ;\n  --tw-slashed-zero: ;\n  --tw-numeric-figure: ;\n  --tw-numeric-spacing: ;\n  --tw-numeric-fraction: ;\n  --tw-ring-inset: ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: #3b82f680;\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur: ;\n  --tw-brightness: ;\n  --tw-contrast: ;\n  --tw-grayscale: ;\n  --tw-hue-rotate: ;\n  --tw-invert: ;\n  --tw-saturate: ;\n  --tw-sepia: ;\n  --tw-drop-shadow: ;\n  --tw-backdrop-blur: ;\n  --tw-backdrop-brightness: ;\n  --tw-backdrop-contrast: ;\n  --tw-backdrop-grayscale: ;\n  --tw-backdrop-hue-rotate: ;\n  --tw-backdrop-invert: ;\n  --tw-backdrop-opacity: ;\n  --tw-backdrop-saturate: ;\n  --tw-backdrop-sepia: ;\n  --tw-contain-size: ;\n  --tw-contain-layout: ;\n  --tw-contain-paint: ;\n  --tw-contain-style: ;\n}\n\n*, :before, :after {\n  box-sizing: border-box;\n  border: 0 solid #e5e7eb;\n}\n\n:before, :after {\n  --tw-content: \"\";\n}\n\nhtml, :host {\n  -webkit-text-size-adjust: 100%;\n  tab-size: 4;\n  font-feature-settings: normal;\n  font-variation-settings: normal;\n  -webkit-tap-highlight-color: transparent;\n  font-family: ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  line-height: 1.5;\n}\n\nbody {\n  line-height: inherit;\n  margin: 0;\n}\n\nhr {\n  color: inherit;\n  border-top-width: 1px;\n  height: 0;\n}\n\nabbr:where([title]) {\n  text-decoration: underline dotted;\n}\n\nh1, h2, h3, h4, h5, h6 {\n  font-size: inherit;\n  font-weight: inherit;\n}\n\na {\n  color: inherit;\n  -webkit-text-decoration: inherit;\n  text-decoration: inherit;\n}\n\nb, strong {\n  font-weight: bolder;\n}\n\ncode, kbd, samp, pre {\n  font-feature-settings: normal;\n  font-variation-settings: normal;\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;\n  font-size: 1em;\n}\n\nsmall {\n  font-size: 80%;\n}\n\nsub, sup {\n  vertical-align: baseline;\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n}\n\nsub {\n  bottom: -.25em;\n}\n\nsup {\n  top: -.5em;\n}\n\ntable {\n  text-indent: 0;\n  border-color: inherit;\n  border-collapse: collapse;\n}\n\nbutton, input, optgroup, select, textarea {\n  font-feature-settings: inherit;\n  font-variation-settings: inherit;\n  font-family: inherit;\n  font-size: 100%;\n  font-weight: inherit;\n  line-height: inherit;\n  letter-spacing: inherit;\n  color: inherit;\n  margin: 0;\n  padding: 0;\n}\n\nbutton, select {\n  text-transform: none;\n}\n\nbutton, input:where([type=\"button\"]), input:where([type=\"reset\"]), input:where([type=\"submit\"]) {\n  -webkit-appearance: button;\n  background-color: #0000;\n  background-image: none;\n}\n\n:-moz-focusring {\n  outline: auto;\n}\n\n:-moz-ui-invalid {\n  box-shadow: none;\n}\n\nprogress {\n  vertical-align: baseline;\n}\n\n::-webkit-inner-spin-button {\n  height: auto;\n}\n\n::-webkit-outer-spin-button {\n  height: auto;\n}\n\n[type=\"search\"] {\n  -webkit-appearance: textfield;\n  outline-offset: -2px;\n}\n\n::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button;\n  font: inherit;\n}\n\nsummary {\n  display: list-item;\n}\n\nblockquote, dl, dd, h1, h2, h3, h4, h5, h6, hr, figure, p, pre {\n  margin: 0;\n}\n\nfieldset {\n  margin: 0;\n  padding: 0;\n}\n\nlegend {\n  padding: 0;\n}\n\nol, ul, menu {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n\ndialog {\n  padding: 0;\n}\n\ntextarea {\n  resize: vertical;\n}\n\ninput::placeholder, textarea::placeholder {\n  opacity: 1;\n  color: #9ca3af;\n}\n\nbutton, [role=\"button\"] {\n  cursor: pointer;\n}\n\n:disabled {\n  cursor: default;\n}\n\nimg, svg, video, canvas, audio, iframe, embed, object {\n  vertical-align: middle;\n  display: block;\n}\n\nimg, video {\n  max-width: 100%;\n  height: auto;\n}\n\n[hidden] {\n  display: none;\n}\n\n.sr-only {\n  clip: rect(0, 0, 0, 0);\n  white-space: nowrap;\n  border-width: 0;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  position: absolute;\n  overflow: hidden;\n}\n\n.ml-1\\.5 {\n  margin-left: .375rem;\n}\n\n.block {\n  display: block;\n}\n\n.flex {\n  display: flex;\n}\n\n.h-5 {\n  height: 1.25rem;\n}\n\n.w-5 {\n  width: 1.25rem;\n}\n\n.items-center {\n  align-items: center;\n}\n\n.truncate {\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n\n.bg-gray-200 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(229 231 235 / var(--tw-bg-opacity));\n}\n\n.font-normal {\n  font-weight: 400;\n}\n\n.shadow {\n  --tw-shadow: 0 1px 3px 0 #0000001a, 0 1px 2px -1px #0000001a;\n  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.blur {\n  --tw-blur: blur(8px);\n  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);\n}\n\n.filter {\n  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);\n}\n\n.transition {\n  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;\n  transition-duration: .15s;\n  transition-timing-function: cubic-bezier(.4, 0, .2, 1);\n}\n\n.turbo-select {\n  margin-top: .5rem;\n  position: relative;\n}\n\n.turbo-select .button {\n  cursor: default;\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\n  text-align: left;\n  --tw-text-opacity: 1;\n  color: rgb(17 24 39 / var(--tw-text-opacity));\n  --tw-shadow: 0 1px 2px 0 #0000000d;\n  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);\n  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);\n  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);\n  --tw-ring-inset: inset;\n  --tw-ring-opacity: 1;\n  --tw-ring-color: rgb(209 213 219 / var(--tw-ring-opacity));\n  border-radius: .375rem;\n  width: 100%;\n  height: 3rem;\n  padding: .375rem 2.5rem .375rem .75rem;\n  position: relative;\n}\n\n.turbo-select .button:focus {\n  outline-offset: 2px;\n  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);\n  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);\n  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);\n  --tw-ring-opacity: 1;\n  --tw-ring-color: rgb(99 102 241 / var(--tw-ring-opacity));\n  outline: 2px solid #0000;\n}\n\n.turbo-select img.img {\n  flex-shrink: 0;\n  width: 1.25rem;\n  height: 1.25rem;\n}\n\n.turbo-select .spinner {\n  width: 1.5rem;\n  height: 1.5rem;\n}\n\n@keyframes spin {\n  to {\n    transform: rotate(360deg);\n  }\n}\n\n.turbo-select .spinner {\n  fill: #2563eb;\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255 / var(--tw-text-opacity));\n  animation: 1s linear infinite spin;\n}\n\n.turbo-select .spinner:is(.dark *) {\n  --tw-text-opacity: 1;\n  color: rgb(75 85 99 / var(--tw-text-opacity));\n}\n\n.turbo-select .input {\n  cursor: default;\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\n  text-align: left;\n  --tw-text-opacity: 1;\n  color: rgb(17 24 39 / var(--tw-text-opacity));\n  --tw-shadow: 0 1px 2px 0 #0000000d;\n  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);\n  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);\n  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);\n  --tw-ring-inset: inset;\n  --tw-ring-opacity: 1;\n  --tw-ring-color: rgb(209 213 219 / var(--tw-ring-opacity));\n  border-radius: .375rem;\n  width: 100%;\n  height: 3rem;\n  padding: .375rem .75rem;\n  position: relative;\n}\n\n.turbo-select .input:focus {\n  outline-offset: 2px;\n  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);\n  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);\n  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);\n  --tw-ring-opacity: 1;\n  --tw-ring-color: rgb(99 102 241 / var(--tw-ring-opacity));\n  outline: 2px solid #0000;\n}\n\n.turbo-select .listbox {\n  z-index: 10;\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\n  --tw-shadow: 0 10px 15px -3px #0000001a, 0 4px 6px -4px #0000001a;\n  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);\n  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);\n  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);\n  --tw-ring-opacity: .05;\n  --tw-ring-color: rgb(0 0 0 / var(--tw-ring-opacity));\n  border-radius: .375rem;\n  width: 100%;\n  max-height: 14rem;\n  margin-top: .25rem;\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 1rem;\n  line-height: 1.5rem;\n  position: absolute;\n  overflow: auto;\n}\n\n.turbo-select .listbox:focus {\n  outline-offset: 2px;\n  outline: 2px solid #0000;\n}\n\n.turbo-select .not-found {\n  --tw-text-opacity: 1;\n  color: rgb(79 70 229 / var(--tw-text-opacity));\n  align-items: center;\n  padding-right: 1rem;\n  display: flex;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  right: 0;\n}\n\n.turbo-select .option {\n  cursor: default;\n  -webkit-user-select: none;\n  user-select: none;\n  --tw-text-opacity: 1;\n  color: rgb(17 24 39 / var(--tw-text-opacity));\n  padding: .5rem 2.25rem .5rem .75rem;\n  position: relative;\n}\n\n.turbo-select .option:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(243 244 246 / var(--tw-bg-opacity));\n}\n\n.turbo-select .caret {\n  pointer-events: none;\n  align-items: center;\n  margin-left: .75rem;\n  padding-right: .5rem;\n  display: flex;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  right: 0;\n}\n\n.turbo-select .caret svg {\n  --tw-text-opacity: 1;\n  color: rgb(156 163 175 / var(--tw-text-opacity));\n  width: 1.25rem;\n  height: 1.25rem;\n}\n\n.turbo-select .title {\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  margin-left: .375rem;\n  font-weight: 400;\n  display: block;\n  overflow: hidden;\n}\n\n.turbo-select .option-highlighted {\n  --tw-bg-opacity: 1;\n  background-color: rgb(243 244 246 / var(--tw-bg-opacity));\n}\n\n.turbo-select .checked {\n  --tw-text-opacity: 1;\n  color: rgb(79 70 229 / var(--tw-text-opacity));\n  align-items: center;\n  padding-right: 1rem;\n  display: flex;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  right: 0;\n}\n\n.turbo-select .not-found {\n  cursor: default;\n  -webkit-user-select: none;\n  user-select: none;\n  --tw-text-opacity: 1;\n  color: rgb(107 114 128 / var(--tw-text-opacity));\n  padding: .5rem 2.25rem .5rem .75rem;\n  position: relative;\n}\n";
+module.exports = "*, :before, :after, ::backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x: ;\n  --tw-pan-y: ;\n  --tw-pinch-zoom: ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position: ;\n  --tw-gradient-via-position: ;\n  --tw-gradient-to-position: ;\n  --tw-ordinal: ;\n  --tw-slashed-zero: ;\n  --tw-numeric-figure: ;\n  --tw-numeric-spacing: ;\n  --tw-numeric-fraction: ;\n  --tw-ring-inset: ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: #3b82f680;\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur: ;\n  --tw-brightness: ;\n  --tw-contrast: ;\n  --tw-grayscale: ;\n  --tw-hue-rotate: ;\n  --tw-invert: ;\n  --tw-saturate: ;\n  --tw-sepia: ;\n  --tw-drop-shadow: ;\n  --tw-backdrop-blur: ;\n  --tw-backdrop-brightness: ;\n  --tw-backdrop-contrast: ;\n  --tw-backdrop-grayscale: ;\n  --tw-backdrop-hue-rotate: ;\n  --tw-backdrop-invert: ;\n  --tw-backdrop-opacity: ;\n  --tw-backdrop-saturate: ;\n  --tw-backdrop-sepia: ;\n  --tw-contain-size: ;\n  --tw-contain-layout: ;\n  --tw-contain-paint: ;\n  --tw-contain-style: ;\n}\n\n*, :before, :after {\n  box-sizing: border-box;\n  border: 0 solid #e5e7eb;\n}\n\n:before, :after {\n  --tw-content: \"\";\n}\n\nhtml, :host {\n  -webkit-text-size-adjust: 100%;\n  tab-size: 4;\n  font-feature-settings: normal;\n  font-variation-settings: normal;\n  -webkit-tap-highlight-color: transparent;\n  font-family: ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  line-height: 1.5;\n}\n\nbody {\n  line-height: inherit;\n  margin: 0;\n}\n\nhr {\n  color: inherit;\n  border-top-width: 1px;\n  height: 0;\n}\n\nabbr:where([title]) {\n  text-decoration: underline dotted;\n}\n\nh1, h2, h3, h4, h5, h6 {\n  font-size: inherit;\n  font-weight: inherit;\n}\n\na {\n  color: inherit;\n  -webkit-text-decoration: inherit;\n  text-decoration: inherit;\n}\n\nb, strong {\n  font-weight: bolder;\n}\n\ncode, kbd, samp, pre {\n  font-feature-settings: normal;\n  font-variation-settings: normal;\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;\n  font-size: 1em;\n}\n\nsmall {\n  font-size: 80%;\n}\n\nsub, sup {\n  vertical-align: baseline;\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n}\n\nsub {\n  bottom: -.25em;\n}\n\nsup {\n  top: -.5em;\n}\n\ntable {\n  text-indent: 0;\n  border-color: inherit;\n  border-collapse: collapse;\n}\n\nbutton, input, optgroup, select, textarea {\n  font-feature-settings: inherit;\n  font-variation-settings: inherit;\n  font-family: inherit;\n  font-size: 100%;\n  font-weight: inherit;\n  line-height: inherit;\n  letter-spacing: inherit;\n  color: inherit;\n  margin: 0;\n  padding: 0;\n}\n\nbutton, select {\n  text-transform: none;\n}\n\nbutton, input:where([type=\"button\"]), input:where([type=\"reset\"]), input:where([type=\"submit\"]) {\n  -webkit-appearance: button;\n  background-color: #0000;\n  background-image: none;\n}\n\n:-moz-focusring {\n  outline: auto;\n}\n\n:-moz-ui-invalid {\n  box-shadow: none;\n}\n\nprogress {\n  vertical-align: baseline;\n}\n\n::-webkit-inner-spin-button {\n  height: auto;\n}\n\n::-webkit-outer-spin-button {\n  height: auto;\n}\n\n[type=\"search\"] {\n  -webkit-appearance: textfield;\n  outline-offset: -2px;\n}\n\n::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button;\n  font: inherit;\n}\n\nsummary {\n  display: list-item;\n}\n\nblockquote, dl, dd, h1, h2, h3, h4, h5, h6, hr, figure, p, pre {\n  margin: 0;\n}\n\nfieldset {\n  margin: 0;\n  padding: 0;\n}\n\nlegend {\n  padding: 0;\n}\n\nol, ul, menu {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n\ndialog {\n  padding: 0;\n}\n\ntextarea {\n  resize: vertical;\n}\n\ninput::placeholder, textarea::placeholder {\n  opacity: 1;\n  color: #9ca3af;\n}\n\nbutton, [role=\"button\"] {\n  cursor: pointer;\n}\n\n:disabled {\n  cursor: default;\n}\n\nimg, svg, video, canvas, audio, iframe, embed, object {\n  vertical-align: middle;\n  display: block;\n}\n\nimg, video {\n  max-width: 100%;\n  height: auto;\n}\n\n[hidden] {\n  display: none;\n}\n\n.sr-only {\n  clip: rect(0, 0, 0, 0);\n  white-space: nowrap;\n  border-width: 0;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  position: absolute;\n  overflow: hidden;\n}\n\n.flex {\n  display: flex;\n}\n\n.h-5 {\n  height: 1.25rem;\n}\n\n.w-5 {\n  width: 1.25rem;\n}\n\n.items-center {\n  align-items: center;\n}\n\n.bg-gray-200 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(229 231 235 / var(--tw-bg-opacity));\n}\n\n.shadow {\n  --tw-shadow: 0 1px 3px 0 #0000001a, 0 1px 2px -1px #0000001a;\n  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n.blur {\n  --tw-blur: blur(8px);\n  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);\n}\n\n.filter {\n  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);\n}\n\n.transition {\n  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;\n  transition-duration: .15s;\n  transition-timing-function: cubic-bezier(.4, 0, .2, 1);\n}\n\n.turbo-select {\n  margin-top: .5rem;\n  position: relative;\n}\n\n.turbo-select .button {\n  cursor: default;\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\n  text-align: left;\n  --tw-text-opacity: 1;\n  color: rgb(17 24 39 / var(--tw-text-opacity));\n  --tw-shadow: 0 1px 2px 0 #0000000d;\n  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);\n  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);\n  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);\n  --tw-ring-inset: inset;\n  --tw-ring-opacity: 1;\n  --tw-ring-color: rgb(209 213 219 / var(--tw-ring-opacity));\n  border-radius: .375rem;\n  width: 100%;\n  height: 3rem;\n  padding: .375rem 2.5rem .375rem .75rem;\n  position: relative;\n}\n\n.turbo-select .button:focus {\n  outline-offset: 2px;\n  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);\n  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);\n  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);\n  --tw-ring-opacity: 1;\n  --tw-ring-color: rgb(99 102 241 / var(--tw-ring-opacity));\n  outline: 2px solid #0000;\n}\n\n.turbo-select img.img {\n  flex-shrink: 0;\n  width: 1.25rem;\n  height: 1.25rem;\n}\n\n.turbo-select .spinner {\n  width: 1.5rem;\n  height: 1.5rem;\n}\n\n@keyframes spin {\n  to {\n    transform: rotate(360deg);\n  }\n}\n\n.turbo-select .spinner {\n  fill: #2563eb;\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255 / var(--tw-text-opacity));\n  animation: 1s linear infinite spin;\n}\n\n.turbo-select .spinner:is(.dark *) {\n  --tw-text-opacity: 1;\n  color: rgb(75 85 99 / var(--tw-text-opacity));\n}\n\n.turbo-select .input {\n  cursor: default;\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\n  text-align: left;\n  --tw-text-opacity: 1;\n  color: rgb(17 24 39 / var(--tw-text-opacity));\n  --tw-shadow: 0 1px 2px 0 #0000000d;\n  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);\n  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);\n  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);\n  --tw-ring-inset: inset;\n  --tw-ring-opacity: 1;\n  --tw-ring-color: rgb(209 213 219 / var(--tw-ring-opacity));\n  border-radius: .375rem;\n  width: 100%;\n  height: 3rem;\n  padding: .375rem .75rem;\n  position: relative;\n}\n\n.turbo-select .input:focus {\n  outline-offset: 2px;\n  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);\n  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);\n  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);\n  --tw-ring-opacity: 1;\n  --tw-ring-color: rgb(99 102 241 / var(--tw-ring-opacity));\n  outline: 2px solid #0000;\n}\n\n.turbo-select .listbox {\n  z-index: 10;\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\n  --tw-shadow: 0 10px 15px -3px #0000001a, 0 4px 6px -4px #0000001a;\n  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);\n  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);\n  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);\n  --tw-ring-opacity: .05;\n  --tw-ring-color: rgb(0 0 0 / var(--tw-ring-opacity));\n  border-radius: .375rem;\n  width: 100%;\n  max-height: 14rem;\n  margin-top: .25rem;\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 1rem;\n  line-height: 1.5rem;\n  position: absolute;\n  overflow: auto;\n}\n\n.turbo-select .listbox:focus {\n  outline-offset: 2px;\n  outline: 2px solid #0000;\n}\n\n.turbo-select .not-found {\n  --tw-text-opacity: 1;\n  color: rgb(79 70 229 / var(--tw-text-opacity));\n  align-items: center;\n  padding-right: 1rem;\n  display: flex;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  right: 0;\n}\n\n.turbo-select .option {\n  cursor: default;\n  -webkit-user-select: none;\n  user-select: none;\n  --tw-text-opacity: 1;\n  color: rgb(17 24 39 / var(--tw-text-opacity));\n  padding: .5rem 2.25rem .5rem .75rem;\n  position: relative;\n}\n\n.turbo-select .option:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(243 244 246 / var(--tw-bg-opacity));\n}\n\n.turbo-select .caret {\n  pointer-events: none;\n  align-items: center;\n  margin-left: .75rem;\n  padding-right: .5rem;\n  display: flex;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  right: 0;\n}\n\n.turbo-select .caret svg {\n  --tw-text-opacity: 1;\n  color: rgb(156 163 175 / var(--tw-text-opacity));\n  width: 1.25rem;\n  height: 1.25rem;\n}\n\n.turbo-select .title {\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  margin-left: .375rem;\n  font-weight: 400;\n  display: block;\n  overflow: hidden;\n}\n\n.turbo-select .option-highlighted {\n  --tw-bg-opacity: 1;\n  background-color: rgb(243 244 246 / var(--tw-bg-opacity));\n}\n\n.turbo-select .checked {\n  --tw-text-opacity: 1;\n  color: rgb(79 70 229 / var(--tw-text-opacity));\n  align-items: center;\n  padding-right: 1rem;\n  display: flex;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  right: 0;\n}\n\n.turbo-select .not-found {\n  cursor: default;\n  -webkit-user-select: none;\n  user-select: none;\n  --tw-text-opacity: 1;\n  color: rgb(107 114 128 / var(--tw-text-opacity));\n  padding: .5rem 2.25rem .5rem .75rem;\n  position: relative;\n}\n";
 
 },{}],"j5zGl":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");

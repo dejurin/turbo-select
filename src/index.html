@@ -25,6 +25,7 @@
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const select = document.querySelector("turbo-select");
+
         select.setAttribute("template", "{value} - {label}");
         select.setAttribute(
           "data",
@@ -41,6 +42,11 @@
             },
           ])
         );
+
+        select.onSelect = (value, label) => {
+          console.log("Selected value:", value);
+          console.log("Selected label:", label);
+        };
       });
     </script>
     <script src="./turbo-select.tsx" type="module"></script>

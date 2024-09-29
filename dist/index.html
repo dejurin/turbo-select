@@ -25,6 +25,10 @@
             img: "https://curate.ams3.cdn.digitaloceanspaces.com/f/flags/eur.svg"
         }
     ]));
+    select.onSelect = (value, label)=>{
+        console.log("Selected value:", value);
+        console.log("Selected label:", label);
+    };
 });
 
 </script>
