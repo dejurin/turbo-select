@@ -1,7 +1,7 @@
 {
   "name": "turbo-select",
   "version": "0.5.0",
-  "description": "A lightweight, 12kb (gzip) select component with support for icons, seamless search functionality, and full a11y (accessibility) support, designed for an intuitive user experience.",
+  "description": "A lightweight, 11kb (gzip) select component with support for icons, seamless search functionality, and full a11y (accessibility) support, designed for an intuitive user experience.",
   "scripts": {
     "build": "bun run build:dev && bun run build:prod",
     "build:prod": "NODE_ENV=production parcel build src/turbo-select.tsx --dist-dir dist --log-level verbose",

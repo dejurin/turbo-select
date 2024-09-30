@@ -52,7 +52,7 @@ type TurboSelectData = {
 };
 
 /**
- * A lightweight, 12kb (gzip) select component with no dependencies, support for icons, seamless search functionality, and full a11y (accessibility) support, designed for an intuitive user experience.
+ * A lightweight, 11kb (gzip) select component with no dependencies, support for icons, seamless search functionality, and full a11y (accessibility) support, designed for an intuitive user experience.
  *
  * @example
  * <TurboSelect
