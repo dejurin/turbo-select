@@ -1,7 +1,12 @@
 {
   "plugins": {
-    "tailwindcss": {},
-    "postcss-import": {},
-    "postcss-nested": {}
+    "postcss-import": true,
+    "postcss-nested": true,
+    "tailwindcss": true,
+    "postcss-url": true,
+    "postcss-custom-properties": true,
+    "cssnano": {
+      "preset": "default"
+    }
   }
 }

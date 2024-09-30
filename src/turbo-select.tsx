@@ -7,35 +7,21 @@
  * @see {@link https://github.com/dejurin/turbo-select}
  *
  *
- * @version 0.4.1
+ * @version 0.5.0
  *
  * @license
  * MIT License
  */
+
+import "./styles.css";
 
 import { Fragment, h } from "preact";
 import { useEffect, useMemo, useRef, useState } from "preact/hooks";
 
 import { StyleTransition } from "preact-transitioning";
 import clsx from "clsx";
-import cssText from "bundle-text:./styles.css";
 import register from "preact-custom-element";
 import { useClickOutside } from "./hooks/click";
-
-/**
- * Injects the given CSS string into the page by creating a new style element
- * and appending it to the head of the document.
- *
- * @param {string} css - The CSS text to inject.
- *
- * @returns {HTMLStyleElement} The created style element.
- */
-const injectStyles = (css: string): HTMLStyleElement => {
-  const styleElement = document.createElement("style");
-  styleElement.textContent = css;
-  document.head.appendChild(styleElement);
-  return styleElement;
-};
 
 /**
  * Interpolates the template string with values from the item object.
@@ -107,13 +93,6 @@ const TurboSelect = ({
   const [mounted, setMounted] = useState<boolean>(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const styleElement = injectStyles(cssText);
-    return () => {
-      document.head.removeChild(styleElement);
-    };
-  }, []);
 
   const handleKeyDown = (e: KeyboardEvent) => {
     switch (e.key) {
@@ -209,7 +188,6 @@ const TurboSelect = ({
 
   return (
     <Fragment>
-      <style>{cssText}</style>
       <div class="turbo-select" ref={ref}>
         {!isOpen ? (
           <button
@@ -369,5 +347,5 @@ register(
   TurboSelect,
   "turbo-select",
   ["data", "selected", "selectLabel", "searchLabel", "loadingLabel", "noResults", "template"],
-  { shadow: true }
+  { shadow: false }
 );
