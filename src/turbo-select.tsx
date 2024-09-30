@@ -7,7 +7,7 @@
  * @see {@link https://github.com/dejurin/turbo-select}
  *
  *
- * @version 0.5.0
+ * @version 0.5.1
  *
  * @license
  * MIT License
@@ -158,7 +158,12 @@ const TurboSelect = ({
 
   // Filter data based on search term
   const filteredDataList = useMemo(
-    () => dataList.filter((item) => item.label.toLowerCase().includes(searchTerm.toLowerCase())),
+    () =>
+      dataList.filter(
+        (item) =>
+          item.label.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.value.toLowerCase().includes(searchTerm.toLowerCase())
+      ),
     [dataList, searchTerm]
   );
 

@@ -302,7 +302,6 @@
 .turbo-select .title {
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-weight: 400;
   display: block;
   overflow: hidden;
 }
