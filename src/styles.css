@@ -49,7 +49,7 @@
   }
 
   .title {
-    @apply block truncate font-normal;
+    @apply block truncate;
   }
 
   .option-highlighted {
