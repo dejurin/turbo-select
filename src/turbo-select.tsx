@@ -196,11 +196,12 @@ const TurboSelect = ({
       handleClose();
 
       const event = new CustomEvent("select", {
-        detail: { value: selectedItem.value, label: selectedItem.label },
+        detail: { ...selectedItem },
         bubbles: true,
         composed: true,
       });
       ref.current?.dispatchEvent(event);
+      ref.current?.setAttribute("selected", value);
     }
   };
 

@@ -593,7 +593,7 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
  * @see {@link https://github.com/dejurin/turbo-select}
  *
  *
- * @version 0.4.0
+ * @version 0.4.1
  *
  * @license
  * MIT License
@@ -737,27 +737,27 @@ var _click = require("./hooks/click");
             handleClose();
             const event = new CustomEvent("select", {
                 detail: {
-                    value: selectedItem.value,
-                    label: selectedItem.label
+                    ...selectedItem
                 },
                 bubbles: true,
                 composed: true
             });
             ref.current?.dispatchEvent(event);
+            ref.current?.setAttribute("selected", value);
         }
     };
     (0, _click.useClickOutside)(ref, handleClose);
     return /*#__PURE__*/ (0, _preact.h)((0, _preact.Fragment), {
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 210,
+            lineNumber: 211,
             columnNumber: 5
         },
         __self: undefined
     }, /*#__PURE__*/ (0, _preact.h)("style", {
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 211,
+            lineNumber: 212,
             columnNumber: 7
         },
         __self: undefined
@@ -766,7 +766,7 @@ var _click = require("./hooks/click");
         ref: ref,
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 212,
+            lineNumber: 213,
             columnNumber: 7
         },
         __self: undefined
@@ -783,7 +783,7 @@ var _click = require("./hooks/click");
         onKeyDown: handleKeyDown,
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 214,
+            lineNumber: 215,
             columnNumber: 11
         },
         __self: undefined
@@ -791,7 +791,7 @@ var _click = require("./hooks/click");
         class: "flex items-center",
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 225,
+            lineNumber: 226,
             columnNumber: 15
         },
         __self: undefined
@@ -803,7 +803,7 @@ var _click = require("./hooks/click");
             alt: selectedItem.label,
             __source: {
                 fileName: "src/turbo-select.tsx",
-                lineNumber: 229,
+                lineNumber: 230,
                 columnNumber: 21
             },
             __self: undefined
@@ -818,7 +818,7 @@ var _click = require("./hooks/click");
         },
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 234,
+            lineNumber: 235,
             columnNumber: 17
         },
         __self: undefined
@@ -826,7 +826,7 @@ var _click = require("./hooks/click");
         role: "status",
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 249,
+            lineNumber: 250,
             columnNumber: 15
         },
         __self: undefined
@@ -839,7 +839,7 @@ var _click = require("./hooks/click");
         xmlns: "http://www.w3.org/2000/svg",
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 250,
+            lineNumber: 251,
             columnNumber: 17
         },
         __self: undefined
@@ -848,7 +848,7 @@ var _click = require("./hooks/click");
         fill: "currentColor",
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 258,
+            lineNumber: 259,
             columnNumber: 19
         },
         __self: undefined
@@ -857,7 +857,7 @@ var _click = require("./hooks/click");
         fill: "currentFill",
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 262,
+            lineNumber: 263,
             columnNumber: 19
         },
         __self: undefined
@@ -865,7 +865,7 @@ var _click = require("./hooks/click");
         class: "sr-only",
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 267,
+            lineNumber: 268,
             columnNumber: 17
         },
         __self: undefined
@@ -873,7 +873,7 @@ var _click = require("./hooks/click");
         class: "caret",
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 270,
+            lineNumber: 271,
             columnNumber: 13
         },
         __self: undefined
@@ -883,7 +883,7 @@ var _click = require("./hooks/click");
         "aria-hidden": "true",
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 271,
+            lineNumber: 272,
             columnNumber: 15
         },
         __self: undefined
@@ -893,7 +893,7 @@ var _click = require("./hooks/click");
         "clip-rule": "evenodd",
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 272,
+            lineNumber: 273,
             columnNumber: 17
         },
         __self: undefined
@@ -908,7 +908,7 @@ var _click = require("./hooks/click");
         type: "search",
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 281,
+            lineNumber: 282,
             columnNumber: 11
         },
         __self: undefined
@@ -931,7 +931,7 @@ var _click = require("./hooks/click");
         },
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 292,
+            lineNumber: 293,
             columnNumber: 9
         },
         __self: undefined
@@ -946,7 +946,7 @@ var _click = require("./hooks/click");
         onKeyDown: handleKeyDown,
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 302,
+            lineNumber: 303,
             columnNumber: 11
         },
         __self: undefined
@@ -962,7 +962,7 @@ var _click = require("./hooks/click");
             }),
             __source: {
                 fileName: "src/turbo-select.tsx",
-                lineNumber: 312,
+                lineNumber: 313,
                 columnNumber: 17
             },
             __self: undefined
@@ -970,7 +970,7 @@ var _click = require("./hooks/click");
             class: "flex items-center",
             __source: {
                 fileName: "src/turbo-select.tsx",
-                lineNumber: 323,
+                lineNumber: 324,
                 columnNumber: 19
             },
             __self: undefined
@@ -980,7 +980,7 @@ var _click = require("./hooks/click");
             alt: item.label,
             __source: {
                 fileName: "src/turbo-select.tsx",
-                lineNumber: 324,
+                lineNumber: 325,
                 columnNumber: 34
             },
             __self: undefined
@@ -994,7 +994,7 @@ var _click = require("./hooks/click");
             },
             __source: {
                 fileName: "src/turbo-select.tsx",
-                lineNumber: 325,
+                lineNumber: 326,
                 columnNumber: 21
             },
             __self: undefined
@@ -1002,7 +1002,7 @@ var _click = require("./hooks/click");
             class: "checked",
             __source: {
                 fileName: "src/turbo-select.tsx",
-                lineNumber: 336,
+                lineNumber: 337,
                 columnNumber: 21
             },
             __self: undefined
@@ -1013,7 +1013,7 @@ var _click = require("./hooks/click");
             "aria-hidden": "true",
             __source: {
                 fileName: "src/turbo-select.tsx",
-                lineNumber: 337,
+                lineNumber: 338,
                 columnNumber: 23
             },
             __self: undefined
@@ -1023,7 +1023,7 @@ var _click = require("./hooks/click");
             "clip-rule": "evenodd",
             __source: {
                 fileName: "src/turbo-select.tsx",
-                lineNumber: 343,
+                lineNumber: 344,
                 columnNumber: 25
             },
             __self: undefined
@@ -1032,7 +1032,7 @@ var _click = require("./hooks/click");
         "aria-disabled": "true",
         __source: {
             fileName: "src/turbo-select.tsx",
-            lineNumber: 354,
+            lineNumber: 355,
             columnNumber: 15
         },
         __self: undefined
